@@ -10,5 +10,6 @@ class IndexView(TemplateView):
         context["who"] = "World"
         return context
 
+
 def about(request):
     return render(request, "about.html")
