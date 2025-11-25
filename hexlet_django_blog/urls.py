@@ -22,7 +22,7 @@ from .views import IndexView
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
-    path("articles/", include("hexlet_django_blog.article.urls")),
+    path("", include("hexlet_django_blog.article.urls")),
     path("about/", views.about, name="about"),
     path("admin/", admin.site.urls),
 ]
