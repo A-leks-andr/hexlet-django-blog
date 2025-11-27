@@ -6,5 +6,4 @@ from django.views import View
 class IndexView(View):
     def get(self, request, tags, article_id):
         content = f"Статья номер {article_id}. Тег {tags}"
-        return render(request, "articles/index.html",
-                      context={"content": content})
+        return render(request, "articles/index.html", context={"content": content})
