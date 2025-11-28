@@ -8,6 +8,7 @@ wheels/
 main.py
 .vscode
 lessons/
+.env
 # Virtual environments
 .venv
 .venv.local
