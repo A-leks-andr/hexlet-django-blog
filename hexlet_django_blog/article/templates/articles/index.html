@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Статья</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Приложение article{% endblock %}
+
+    {% block content %}
+    <h2>Эксперименты с Джанго на Хекслет</h2>
     <h3>{{ content }}</h3>
-</body>
-</html>
+
+    {% endblock %}

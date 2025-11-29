@@ -1,15 +1,7 @@
-from django.shortcuts import redirect
-from django.urls import path, reverse_lazy
-from .views import IndexView
+from django.urls import path
+from hexlet_django_blog.article import views
 
-app_name = "article"
 urlpatterns = [
-    path("articles/<str:tags>/<int:article_id>/", IndexView.as_view(), name="article"),
-    path(
-        "",
-        lambda request: redirect(
-            reverse_lazy("article", kwargs={"tags": "python", "article_id": 42})
-        ),
-        name="home",
-    ),
-]
+    path("", views.IndexView.as_view(), name="article"),
+    path("<str:tags>/<int:article_id>/", views.ArticleTagsId.as_view(), name="article_id")
+    ]
