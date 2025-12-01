@@ -3,7 +3,9 @@
 {% block title %}Приложение article{% endblock %}
 
     {% block content %}
-    <h2>Эксперименты с Джанго на Хекслет</h2>
-    <h3>{{ content }}</h3>
-
+    <h1>Список статей</h1>
+    {% for article in articles %}
+        <h3>{{ article.name }}</h3>
+        <div>{{ article.body|slice:":200" }}</div>
+    {% endfor %}
     {% endblock %}
