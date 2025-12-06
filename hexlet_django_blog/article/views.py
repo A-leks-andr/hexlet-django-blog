@@ -1,7 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from hexlet_django_blog.article.models import Article
+from hexlet_django_blog.article.forms import CreateArticle
+from django.urls import reverse
 
 
 # Create your views here.
@@ -28,3 +30,19 @@ class ArticleView(View):
                 "article": article,
             },
         )
+
+
+class CreateArticleView(View):
+    template_name = 'articles/create.html'
+
+    def get(self, request, *args, **kwargs):
+        form = CreateArticle()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = CreateArticle(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('article'))
+        else:
+            return render(request, self.template_name, {'form': form})

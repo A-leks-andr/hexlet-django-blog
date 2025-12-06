@@ -8,5 +8,6 @@ urlpatterns = [
         views.ArticleTagsId.as_view(),
         name="article_tags",
     ),
-    path("<int:id>", views.ArticleView.as_view(), name="article_id"),
+    path("<int:id>/", views.ArticleView.as_view(), name="article_id"),
+    path('create/', views.CreateArticleView.as_view(), name='create_article')
 ]
