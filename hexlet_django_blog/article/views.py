@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from hexlet_django_blog.article.models import Article
-from hexlet_django_blog.article.forms import CreateArticle
+from hexlet_django_blog.article.forms import CreateArticle, ArticleForm
 from django.urls import reverse
 
 
@@ -33,16 +33,38 @@ class ArticleView(View):
 
 
 class CreateArticleView(View):
-    template_name = 'articles/create.html'
+    template_name = "articles/create.html"
 
     def get(self, request, *args, **kwargs):
         form = CreateArticle()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):
         form = CreateArticle(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(reverse('article'))
+            return redirect(reverse("article"))
         else:
-            return render(request, self.template_name, {'form': form})
+            return render(request, self.template_name, {"form": form})
+
+
+class ArticleFormEditView(View):
+    def get(self, request, *args, **kwargs):
+        article_id = kwargs.get("id")
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(instance=article)
+        return render(
+            request, "articles/update.html", {"form": form, "article_id": article_id}
+        )
+
+    def post(self, request, *args, **kwargs):
+        article_id = kwargs.get("id")
+        article = Article.objects.get(id=article_id)
+        form = ArticleForm(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect("article")
+
+        return render(
+            request, "articles/update.html", {"form": form, "article_id": article_id}
+        )

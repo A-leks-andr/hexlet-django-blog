@@ -3,6 +3,15 @@
 {% block title %}Приложение article{% endblock %}
 
     {% block content %}
+    {% if form.errors %}
+    <div>
+        <ul>
+            {% for error in form.errors %}
+            <li><strong>{{ error|escape }}</strong></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
     <h2>Создать новую статью</h2>
     <form method="post">
     {% csrf_token %}

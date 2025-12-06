@@ -4,20 +4,21 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('article', '0001_initial'),
+        ("article", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='article',
-            name='body',
-            field=models.TextField(verbose_name='Текст статьи'),
+            model_name="article",
+            name="body",
+            field=models.TextField(verbose_name="Текст статьи"),
         ),
         migrations.AlterField(
-            model_name='article',
-            name='name',
-            field=models.CharField(max_length=200, unique=True, verbose_name='Заголовок'),
+            model_name="article",
+            name="name",
+            field=models.CharField(
+                max_length=200, unique=True, verbose_name="Заголовок"
+            ),
         ),
     ]
